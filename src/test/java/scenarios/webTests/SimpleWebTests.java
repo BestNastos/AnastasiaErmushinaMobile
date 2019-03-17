@@ -1,4 +1,4 @@
-package webTests;
+package scenarios.webTests;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;

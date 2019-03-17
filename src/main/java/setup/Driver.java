@@ -15,8 +15,8 @@ import static io.appium.java_client.remote.MobileCapabilityType.*;
  * Initialize a driver with test properties
  */
 public class Driver extends TestProperties { //TODO singleton
-    private AppiumDriver driverSingleton;
-    private WebDriverWait waitSingleton;
+    private static AppiumDriver driverSingleton;
+    private static WebDriverWait waitSingleton;
 
     // Properties to be read
     protected static String AUT; // (mobile) app under testing //TODO private all of them?
@@ -38,7 +38,7 @@ public class Driver extends TestProperties { //TODO singleton
      *
      * @throws IllegalArgumentException, MalformedURLException
      */
-    protected void prepareDriver() throws IllegalArgumentException, MalformedURLException {
+    protected static void prepareDriver() throws IllegalArgumentException, MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
         String browserName;
@@ -72,7 +72,8 @@ public class Driver extends TestProperties { //TODO singleton
         waitSingleton = new WebDriverWait(driverSingleton, 10); //TODO put 'if' back?
     }
 
-    protected AppiumDriver driverSingleton() throws MalformedURLException {
+    public static AppiumDriver driverSingleton() throws IOException {
+        new Driver();
         if (driverSingleton == null) prepareDriver();
         return driverSingleton;
     }
