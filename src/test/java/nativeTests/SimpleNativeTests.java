@@ -9,6 +9,8 @@ import java.io.IOException;
 @Test(groups = "native")
 public class SimpleNativeTests extends Driver {
 
+//    Driver driver = new Driver();
+
     protected SimpleNativeTests() throws IOException {//TODO fetch property file
     }
 
@@ -17,7 +19,7 @@ public class SimpleNativeTests extends Driver {
 
         String app_package_name = "com.example.android.contactmanager:id/";
         By add_btn = By.id(app_package_name + "addContactButton");
-        driver().findElement(add_btn).click();
+        driverSingleton().findElement(add_btn).click();
 
         //TODO wait for fields appearance?
         //TODO Assertions needs to be verified (tested) in turn.

@@ -13,7 +13,7 @@ public class TestProperties {
     //TODO - test has driver, driver has this string and passes it to getCurrentProps()
 
     Properties getCurrentProps(/* TODO propertyFileName */) throws IOException {
-        FileInputStream in = new FileInputStream(NATIVE.toString());
+        FileInputStream in = new FileInputStream(WEB.toString());
         currentProps.load(in);
         in.close();
         return currentProps;

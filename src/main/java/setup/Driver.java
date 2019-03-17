@@ -15,9 +15,8 @@ import static io.appium.java_client.remote.MobileCapabilityType.*;
  * Initialize a driver with test properties
  */
 public class Driver extends TestProperties { //TODO singleton
-    protected AppiumDriver driverSingle; //TODO private
-    protected DesiredCapabilities capabilities;//TODO private
-    protected WebDriverWait waitSingle;//TODO private
+    private AppiumDriver driverSingleton;
+    private WebDriverWait waitSingleton;
 
     // Properties to be read
     protected static String AUT; // (mobile) app under testing //TODO private all of them?
@@ -26,7 +25,7 @@ public class Driver extends TestProperties { //TODO singleton
     protected static String DRIVER;
 
     // Constructor initializes properties on driver creation
-    protected Driver() throws IOException {
+    public Driver() throws IOException {
         AUT = getProp("aut");
         String t_sut = getProp("sut");
         SUT = t_sut == null ? null : "http://" + t_sut;
@@ -40,7 +39,7 @@ public class Driver extends TestProperties { //TODO singleton
      * @throws IllegalArgumentException, MalformedURLException
      */
     protected void prepareDriver() throws IllegalArgumentException, MalformedURLException {
-        capabilities = new DesiredCapabilities();
+        DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
         String browserName;
 
@@ -69,24 +68,18 @@ public class Driver extends TestProperties { //TODO singleton
             throw new IllegalArgumentException("Unknown type of mobile app");//TODO change exception?
         }
 
-        // Init driver for local Appium server with capabilities have been set
-        // TODO why if? it's not a getter, it's 'prepare driver method
-        if (driverSingle == null) driverSingle = new AppiumDriver(new URL(DRIVER), capabilities);
-
-        // Set an object to handle timeouts
-        // TODO why if? it's not a getter, it's 'prepare driver method, what wait has to do with it?
-        if (waitSingle == null) waitSingle = new WebDriverWait(driverSingle, 10);
+        driverSingleton = new AppiumDriver(new URL(DRIVER), capabilities); //TODO put 'if' back?
+        waitSingleton = new WebDriverWait(driverSingleton, 10); //TODO put 'if' back?
     }
 
-    protected AppiumDriver driver()throws MalformedURLException {
-        if(driverSingle == null) prepareDriver();
-        return driverSingle;
+    protected AppiumDriver driverSingleton() throws MalformedURLException {
+        if (driverSingleton == null) prepareDriver();
+        return driverSingleton;
     }
 
-    protected WebDriverWait driverWait() { // why throws Exception?
-        return waitSingle;
-        //TODO is it really going to be initialized by now?
-        //TODO call prepare driver method or init here?
+    protected WebDriverWait driverWait() throws MalformedURLException {
+        if (waitSingleton == null) prepareDriver();
+        return waitSingleton;
     }
 }
 //TODO slide 31

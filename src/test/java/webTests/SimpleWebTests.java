@@ -14,7 +14,7 @@ public class SimpleWebTests extends Driver {
 
     @Test(description = "Open website")
     public void webTest() throws Exception {
-        driver().get(SUT);
+        driverSingleton().get(SUT);
         driverWait().until(ExpectedConditions.urlToBe(SUT+"/"));
 
         //TODO regex

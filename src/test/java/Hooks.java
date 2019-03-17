@@ -24,7 +24,7 @@ public class Hooks extends Driver {
 
     @AfterSuite(description = "Close driver on all tests completion", groups ={"web", "native"})
     public void tearDown() throws MalformedURLException {
-        driver().quit();
+        driverSingleton().quit();
         System.out.println("Teardown complete");
     }
 }
