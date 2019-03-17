@@ -2,19 +2,18 @@ package scenarios.nativeTests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import setup.Driver;
 import scenarios.Hooks;
-
-import java.io.IOException;
+import setup.PropertyFile;
 
 @Test(groups = "native")
 public class SimpleNativeTests extends Hooks {
 
-    protected SimpleNativeTests() throws IOException {//TODO fetch property file
-    }
+//    SimpleNativeTests(PropertyFile path){
+//        super(path);
+//    }
 
     @Test(description = "Just click on button 'Add contact'")
-    public void simplestTest() { //throws Exception ?
+    public void nativeTest() { //throws Exception ?
 
         String app_package_name = "com.example.android.contactmanager:id/";
         By add_btn = By.id(app_package_name + "addContactButton");

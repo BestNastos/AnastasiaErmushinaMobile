@@ -2,19 +2,17 @@ package scenarios.webTests;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
-import setup.Driver;
+import scenarios.Hooks;
 
-import java.io.IOException;
+import static setup.Driver.*;
+import static setup.Driver.SUT;
 
 @Test(groups = "web")
-public class SimpleWebTests extends Driver {
-
-    protected SimpleWebTests() throws IOException {
-    }
+public class SimpleWebTests extends Hooks {
 
     @Test(description = "Open website")
     public void webTest() throws Exception {
-        driverSingleton().get(SUT);
+        driver.get(SUT);
         driverWait().until(ExpectedConditions.urlToBe(SUT+"/"));
 
         //TODO regex

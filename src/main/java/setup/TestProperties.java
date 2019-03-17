@@ -8,16 +8,20 @@ import static setup.PropertyFile.*;
 
 public class TestProperties {
 
-    Properties currentProps = new Properties();
-    String propertyFileName = "";
-    //TODO - test has driver, driver has this string and passes it to getCurrentProps()
+    private Properties currentProps = new Properties();
+    private String propertyPath;
 
-    Properties getCurrentProps(/* TODO propertyFileName */) throws IOException {
+//    TestProperties(PropertyFile path){
+//        propertyPath = path.toString();
+//    }
+
+    Properties getCurrentProps() throws IOException {
         FileInputStream in = new FileInputStream(NATIVE.toString());
         currentProps.load(in);
         in.close();
         return currentProps;
     }
+
     protected String getProp(String propKey) throws IOException {
         if(!currentProps.containsKey(propKey)) currentProps = getCurrentProps();
         // "null" as second parameter (defaultValue) seems redundant:
