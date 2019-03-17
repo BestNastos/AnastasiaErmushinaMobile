@@ -24,6 +24,7 @@ public class SimpleWebTests extends Hooks {
         //TODO what is default timeout?
         //TODO status check
 
+        //check browser title
         System.out.println("Site opening done");
     }
 }

@@ -27,6 +27,13 @@ public class SimpleNativeTests extends Hooks {
         //TODO Assertions needs to be verified (tested) in turn.
         //TODO “Mutation testing” (light version) can be used for this purpose.
 
+        //target account com.example.android.contactmanager:id/accountSpinner
+        //contact name com.example.android.contactmanager:id/contactNameEditText
+        //contact phone com.example.android.contactmanager:id/contactPhoneEditText
+        //contact email com.example.android.contactmanager:id/contactEmailEditText
+        // displayed
+        // driver().getKeyboard();
+
         System.out.println("Simplest Appium test done");
     }
 }
