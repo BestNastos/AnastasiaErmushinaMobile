@@ -6,13 +6,18 @@ import scenarios.Hooks;
 
 import static setup.Driver.*;
 import static setup.Driver.SUT;
+import static setup.PropertyFile.WEB;
 
 @Test(groups = "web")
 public class SimpleWebTests extends Hooks {
 
+    SimpleWebTests(){
+        super(WEB.toString());
+    }
+
     @Test(description = "Open website")
     public void webTest() throws Exception {
-        driver.get(SUT);
+        driverSingleton().get(SUT);
         driverWait().until(ExpectedConditions.urlToBe(SUT+"/"));
 
         //TODO regex

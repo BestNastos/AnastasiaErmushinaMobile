@@ -4,27 +4,25 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import static setup.PropertyFile.*;
-
 public class TestProperties {
 
     private Properties currentProps = new Properties();
     private String propertyPath;
 
-//    TestProperties(PropertyFile path){
-//        propertyPath = path.toString();
-//    }
+    public TestProperties(String path) {
+        this.propertyPath = path;
+    }
 
-    Properties getCurrentProps() throws IOException {
-        FileInputStream in = new FileInputStream(NATIVE.toString());
+    public Properties loadProperties() throws IOException {
+        FileInputStream in = new FileInputStream(propertyPath);
         currentProps.load(in);
         in.close();
         return currentProps;
     }
 
-    protected String getProp(String propKey) throws IOException {
-        if(!currentProps.containsKey(propKey)) currentProps = getCurrentProps();
+    String getPropertyValue(String key) throws IOException {
+        if (!currentProps.containsKey(key)) currentProps = loadProperties();
         // "null" as second parameter (defaultValue) seems redundant:
-        return currentProps.getProperty(propKey);
+        return currentProps.getProperty(key);
     }
 }

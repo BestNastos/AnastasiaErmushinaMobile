@@ -13,23 +13,23 @@ import static io.appium.java_client.remote.MobileCapabilityType.*;
 /**
  * Initialize a driver with test properties
  */
-public class Driver extends TestProperties { //TODO singleton
+public class Driver {
     private static AppiumDriver driverSingleton;
     private static WebDriverWait waitSingleton;
+    //TODO test properties field?
 
     // Properties to be read
-    private static String AUT; // (mobile) app under testing //TODO private all of them?
-    public static String SUT; // site under testing //TODO enum?
+    private static String AUT; //TODO move to TestProperties?
+    public static String SUT;
     private static String TEST_PLATFORM;
     private static String DRIVER;
 
-    private static void readProperties() throws IOException {
-        TestProperties properties = new TestProperties();
-        AUT = properties.getProp("aut");
-        String t_sut = properties.getProp("sut");
-        SUT = t_sut == null ? null : "http://" + t_sut;
-        TEST_PLATFORM = properties.getProp("platform");
-        DRIVER = properties.getProp("driver");
+    public static void readProperties(TestProperties properties) throws IOException {
+        AUT = properties.getPropertyValue("aut"); //TODO hardcode / prop / enum?
+        String t_sut = properties.getPropertyValue("sut");
+        SUT = t_sut == null ? null : "http://" + t_sut;//TODO what's the point?
+        TEST_PLATFORM = properties.getPropertyValue("platform");
+        DRIVER = properties.getPropertyValue("driver");
     }
 
     private Driver() {
@@ -38,10 +38,9 @@ public class Driver extends TestProperties { //TODO singleton
     /**
      * Initialize driver with appropriate capabilities depending on platform and application
      *
-     * @throws IllegalArgumentException, MalformedURLException
+     * @throws IllegalArgumentException, IOException
      */
     private static void prepareDriver() throws IllegalArgumentException, IOException {
-        readProperties();
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
         String browserName;
@@ -68,11 +67,11 @@ public class Driver extends TestProperties { //TODO singleton
             // Web
             capabilities.setCapability(BROWSER_NAME, browserName);
         } else {
-            throw new IllegalArgumentException("Unknown type of mobile app");//TODO change exception?
+            throw new IllegalArgumentException("Unknown type of mobile app");
         }
 
-        driverSingleton = new AppiumDriver(new URL(DRIVER), capabilities); //TODO put 'if' back?
-        waitSingleton = new WebDriverWait(driverSingleton, 10); //TODO put 'if' back?
+        driverSingleton = new AppiumDriver(new URL(DRIVER), capabilities);
+        waitSingleton = new WebDriverWait(driverSingleton, 10);
     }
 
     public static AppiumDriver driverSingleton() throws IOException {
@@ -85,6 +84,4 @@ public class Driver extends TestProperties { //TODO singleton
         return waitSingleton;
     }
 }
-//TODO slide 31
-//TODO more docs
 
