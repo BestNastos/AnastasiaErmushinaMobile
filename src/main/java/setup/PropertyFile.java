@@ -2,22 +2,18 @@ package setup;
 
 public enum PropertyFile {
 
-    NATIVE("nativetests"),
-    WEB("webtest"),
-    HYBRID("hybridtest");
+    NATIVE("src\\nativetests.properties"),
+    WEB("src\\webtest.properties"),
+    HYBRID("src\\webtest.properties"); //for the future
 
-    private String appType;
+    private String propertyPath;
 
     PropertyFile(String appType) {
-        this.appType = appType;
+        this.propertyPath = appType;
     }
 
     @Override
     public String toString() {
-        return appType;
-    }
-
-    public String getPropertyFileName(){ //TODO not
-        return "src\\" + appType + ".properties";
+        return propertyPath;
     }
 }
