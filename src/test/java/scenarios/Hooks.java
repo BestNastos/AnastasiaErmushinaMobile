@@ -8,7 +8,6 @@ import setup.TestProperties;
 import java.io.IOException;
 
 import static setup.Driver.*;
-import static setup.Driver.driverSingleton;
 
 @Test(groups = {"web", "native"}) //TODO testng config?
 public class Hooks {
@@ -33,7 +32,7 @@ public class Hooks {
 
     @AfterSuite(description = "Close driver on all tests completion", groups = {"web", "native"})
     public void tearDown() throws IOException {
-        driverSingleton().quit();
+        driver().quit();
         System.out.println("Teardown complete");
     }
 }

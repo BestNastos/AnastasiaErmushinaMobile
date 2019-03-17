@@ -74,7 +74,7 @@ public class Driver {
         waitSingleton = new WebDriverWait(driverSingleton, 10);
     }
 
-    public static AppiumDriver driverSingleton() throws IOException {
+    public static AppiumDriver driver() throws IOException {
         if (driverSingleton == null) prepareDriver();
         return driverSingleton;
     }

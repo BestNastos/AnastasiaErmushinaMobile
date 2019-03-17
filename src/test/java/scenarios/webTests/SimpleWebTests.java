@@ -4,6 +4,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 import scenarios.Hooks;
 
+import static org.testng.Assert.*;
 import static setup.Driver.*;
 import static setup.Driver.SUT;
 import static setup.PropertyFile.WEB;
@@ -11,20 +12,26 @@ import static setup.PropertyFile.WEB;
 @Test(groups = "web")
 public class SimpleWebTests extends Hooks {
 
-    SimpleWebTests(){
+    SimpleWebTests() {
         super(WEB.toString());
     }
 
     @Test(description = "Open website")
     public void webTest() throws Exception {
-        driverSingleton().get(SUT);
-        driverWait().until(ExpectedConditions.urlToBe(SUT+"/"));
 
-        //TODO regex
+        // 1. Open Website
+        driver().get(SUT);
+
+        // 2. Assert the page is loaded
+        driverWait().until(ExpectedConditions.urlToBe(SUT + "/"));
+
+        // 3. Assert the browser title is correct
+        assertEquals(driver().getTitle(), "Internet Assigned Numbers Authority");
+
+        System.out.println("Site opening done");
+
         //TODO what is default timeout?
         //TODO status check
-
-        //check browser title
-        System.out.println("Site opening done");
+        //TODO regex
     }
 }

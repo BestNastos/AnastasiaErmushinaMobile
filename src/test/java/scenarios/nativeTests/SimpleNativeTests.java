@@ -1,12 +1,14 @@
 package scenarios.nativeTests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import scenarios.Hooks;
 
 import java.io.IOException;
 
-import static setup.Driver.driverSingleton;
+import static org.testng.Assert.*;
+import static setup.Driver.driver;
 import static setup.PropertyFile.NATIVE;
 
 @Test(groups = "native")
@@ -18,22 +20,34 @@ public class SimpleNativeTests extends Hooks {
 
     @Test(description = "Just click on button 'Add contact'")
     public void nativeTest() throws IOException {
+        String packName = "com.example.android.contactmanager:id/";
 
-        String app_package_name = "com.example.android.contactmanager:id/";
-        By add_btn = By.id(app_package_name + "addContactButton");
-        driverSingleton().findElement(add_btn).click();
+        // 1. Click "Add Contact"
+        WebElement abbButton = driver().findElement(By.id(packName + "addContactButton"));
+        abbButton.click();
 
-        //TODO wait for fields appearance?
+        // 2. Assert that "Target Account" field is visible
+        WebElement targetAccount = driver().findElement(By.id(packName + "accountSpinner"));
+        assertTrue(targetAccount.isDisplayed());
+
+        // 3. Assert that "Contact Name" field is visible
+        WebElement name = driver().findElement(By.id(packName + "contactNameEditText"));
+        assertTrue(name.isDisplayed());
+
+        // 4. Assert that "Contact Phone" field is visible
+        WebElement phone = driver().findElement(By.id(packName + "contactPhoneEditText"));
+        assertTrue(phone.isDisplayed());
+
+        // 5. Assert that "Contact E-mail" field is visible
+        WebElement email = driver().findElement(By.id(packName + "contactEmailEditText"));
+        assertTrue(email.isDisplayed());
+
+        //6. Assert that keyboard pops up
+        assertNotNull(driver().getKeyboard());
+
+        System.out.println("Test complete");
+
         //TODO Assertions needs to be verified (tested) in turn.
         //TODO “Mutation testing” (light version) can be used for this purpose.
-
-        //target account com.example.android.contactmanager:id/accountSpinner
-        //contact name com.example.android.contactmanager:id/contactNameEditText
-        //contact phone com.example.android.contactmanager:id/contactPhoneEditText
-        //contact email com.example.android.contactmanager:id/contactEmailEditText
-        // displayed
-        // driver().getKeyboard();
-
-        System.out.println("Simplest Appium test done");
     }
 }
