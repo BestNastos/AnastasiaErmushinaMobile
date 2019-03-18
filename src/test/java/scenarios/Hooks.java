@@ -3,6 +3,7 @@ package scenarios;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+import setup.Driver;
 import setup.TestProperties;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ public class Hooks {
     public void setUp() throws IOException {
         properties.loadProperties();
         readProperties(properties);
+        prepareDriver();
         System.out.println("Setup complete");
     }
 

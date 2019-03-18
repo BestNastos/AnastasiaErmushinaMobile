@@ -9,9 +9,11 @@ import java.io.IOException;
 import java.net.URL;
 
 import static io.appium.java_client.remote.MobileCapabilityType.*;
+import static setup.KeysAndOptions.*;
 
 /**
- * Initialize a driver with test properties
+ * This class reads properties, initializes a driver with test properties
+ * and a web driver wait object
  */
 public class Driver {
     private static AppiumDriver driverSingleton;
@@ -19,17 +21,18 @@ public class Driver {
     //TODO test properties field?
 
     // Properties to be read
-    private static String AUT; //TODO move to TestProperties?
+    private static String AUT;
     public static String SUT;
     private static String TEST_PLATFORM;
     private static String DRIVER;
+    private static String DEVICE;
 
     public static void readProperties(TestProperties properties) throws IOException {
-        AUT = properties.getPropertyValue("aut"); //TODO hardcode / prop / enum?
-        String t_sut = properties.getPropertyValue("sut");
-        SUT = t_sut == null ? null : "http://" + t_sut;//TODO what's the point?
-        TEST_PLATFORM = properties.getPropertyValue("platform");
-        DRIVER = properties.getPropertyValue("driver");
+        AUT = properties.getPropertyValue(AUT_KEY);
+        SUT = properties.getPropertyValue(SUT_KEY);
+        TEST_PLATFORM = properties.getPropertyValue(PLATFORM_KEY);
+        DRIVER = properties.getPropertyValue(DRIVER_KEY);
+        DEVICE = properties.getPropertyValue(DEVICE_KEY);
     }
 
     private Driver() {
@@ -40,19 +43,19 @@ public class Driver {
      *
      * @throws IllegalArgumentException, IOException
      */
-    private static void prepareDriver() throws IllegalArgumentException, IOException {
+    public static void prepareDriver() throws IllegalArgumentException, IOException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
         String browserName;
 
         // Setup test platform: Android or iOS. Browser also depends on a platform.
         switch (TEST_PLATFORM) {
-            case "Android":
-                capabilities.setCapability(DEVICE_NAME, "5200b9bffeb8453b"); //TODO to props?
-                browserName = "Chrome";
+            case ANDROID:
+                capabilities.setCapability(DEVICE_NAME, DEVICE);
+                browserName = CHROME;
                 break;
-            case "iOS":
-                browserName = "Safari";
+            case iOS:
+                browserName = SAFARI;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown mobile platform");//TODO just exception?
@@ -74,11 +77,20 @@ public class Driver {
         waitSingleton = new WebDriverWait(driverSingleton, 10);
     }
 
+/**
+ * Method works as a Getter for AppiumDriver driverSingleton field. If it is not initialized,
+ * method initializes it prior to returning it.
+ **/
     public static AppiumDriver driver() throws IOException {
         if (driverSingleton == null) prepareDriver();
         return driverSingleton;
     }
 
+    /**
+     * Works as a Getter for WebDriverWait waitSingleton field. If the field is not
+     * initialized, method calls prepareDriver() and initializes AppiumDriver
+     * driverSingleton field along with waitSingleton prior to returning waitSingleton.
+     **/
     public static WebDriverWait driverWait() throws IOException {
         if (waitSingleton == null) prepareDriver();
         return waitSingleton;

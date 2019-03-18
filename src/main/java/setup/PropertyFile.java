@@ -8,8 +8,8 @@ public enum PropertyFile {
 
     private String propertyPath;
 
-    PropertyFile(String appType) {
-        this.propertyPath = appType;
+    PropertyFile(String path) {
+        this.propertyPath = path;
     }
 
     @Override
