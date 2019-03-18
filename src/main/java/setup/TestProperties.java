@@ -20,9 +20,9 @@ public class TestProperties {
 
     /**
      * Loads properties from file into 'Properties currentProps' field.
+     *
      * @return This object.
-     * @throws IOException
-     *         If path to property file is incorrect.
+     * @throws IOException If path to property file is incorrect.
      */
     public TestProperties loadProperties() throws IOException {
         FileInputStream in = new FileInputStream(propertyPath);
@@ -33,11 +33,10 @@ public class TestProperties {
 
     /**
      * Returns property value by key. If key is missing, loads properties from file.
-     * @param key
-     *        The key of the value to return
+     *
+     * @param key The key of the value to return
      * @return The value corresponding to the key
-     * @throws IOException
-     *         If path to property file in #loadProperties() is incorrect.
+     * @throws IOException If path to property file in #loadProperties() is incorrect.
      */
     String getPropertyValue(String key) throws IOException {
         if (!currentProps.containsKey(key)) loadProperties();

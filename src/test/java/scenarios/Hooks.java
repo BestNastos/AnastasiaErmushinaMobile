@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 
 import static setup.Driver.*;
 
-@Test(groups = {"web", "native"}) //TODO testng config?
+//@Test(groups = {"web", "native"}) //TODO testng config?
 public class Hooks {
     private TestProperties properties;
 
@@ -20,9 +20,9 @@ public class Hooks {
 
     /**
      * Loads and reads properties to prepare driver for tests.
-     * @throws IOException
-     *         If path to property file in #loadProperties() is incorrect
-     *         or url needed to #prepareDriver() is incorrect.
+     *
+     * @throws IOException If path to property file in #loadProperties() is incorrect
+     *                     or url needed to #prepareDriver() is incorrect.
      */
     @BeforeSuite(description = "load properties and prepare driver for tests", groups = {"web", "native"})
     public void setUp() throws IOException {
@@ -32,8 +32,9 @@ public class Hooks {
     }
 
     //TODO add docs?
+    //TODO exception because we try to init driver. fix?
     @AfterSuite(description = "Close driver after tests", groups = {"web", "native"})
-    public void tearDown() throws MalformedURLException { //TODO this exception because we try to init driver. fix?
+    public void tearDown() throws MalformedURLException {
         driver().quit();
         System.out.println("Teardown complete");
     }

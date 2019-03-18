@@ -9,14 +9,14 @@ import static setup.Driver.*;
 import static setup.Driver.SUT;
 import static setup.PropertyFile.WEB;
 
-@Test(groups = "web")
+//@Test(groups = "web")
 public class SimpleWebTests extends Hooks {
 
     SimpleWebTests() {
         super(WEB.toString());
     }
 
-    @Test(description = "Open website and assert it is opened")
+    @Test(description = "Open website and assert it is opened", groups = "web")
     public void webTest() throws Exception {
 
         // 1. Open Website
