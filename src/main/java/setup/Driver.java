@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import static io.appium.java_client.remote.MobileCapabilityType.*;
@@ -27,6 +28,17 @@ public class Driver {
     private static String DRIVER;
     private static String DEVICE;
 
+    private Driver() {
+    }
+
+    /**
+     * Reads properties from TestProperties parameter and assigns them to static fields of this class
+     * @param properties
+     *        TestProperties that contain data for setting driver capabilities.
+     * @throws IOException
+     *         If path to property file in #loadProperties() within #getPropertyValue(String key)
+     *         is incorrect.
+     */
     public static void readProperties(TestProperties properties) throws IOException {
         AUT = properties.getPropertyValue(AUT_KEY);
         SUT = properties.getPropertyValue(SUT_KEY);
@@ -35,15 +47,14 @@ public class Driver {
         DEVICE = properties.getPropertyValue(DEVICE_KEY);
     }
 
-    private Driver() {
-    }
-
     /**
      * Initialize driver with appropriate capabilities depending on platform and application
-     *
-     * @throws IllegalArgumentException, IOException
+     * @throws IllegalArgumentException
+     *         If given an unknown mobile platform or unknown type of app
+     * @throws MalformedURLException
+     *         If url needed to instantiate driver is incorrect
      */
-    public static void prepareDriver() throws IllegalArgumentException, IOException {
+    public static void prepareDriver() throws IllegalArgumentException, MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
         String browserName;
@@ -58,7 +69,7 @@ public class Driver {
                 browserName = SAFARI;
                 break;
             default:
-                throw new IllegalArgumentException("Unknown mobile platform");//TODO just exception?
+                throw new IllegalArgumentException("Unknown mobile platform: " + TEST_PLATFORM);
         }
 
         // Setup type of application: mobile, web (or hybrid)
@@ -77,11 +88,14 @@ public class Driver {
         waitSingleton = new WebDriverWait(driverSingleton, 10);
     }
 
-/**
- * Method works as a Getter for AppiumDriver driverSingleton field. If it is not initialized,
- * method initializes it prior to returning it.
- **/
-    public static AppiumDriver driver() throws IOException {
+    /**
+     * Method works as a Getter for AppiumDriver driverSingleton field. If it is not initialized,
+     * method initializes it prior to returning it.
+     * @return Initialized driver.
+     * @throws MalformedURLException
+     *         If url needed to #prepareDriver() is incorrect
+     */
+    public static AppiumDriver driver() throws MalformedURLException {
         if (driverSingleton == null) prepareDriver();
         return driverSingleton;
     }
@@ -90,8 +104,12 @@ public class Driver {
      * Works as a Getter for WebDriverWait waitSingleton field. If the field is not
      * initialized, method calls prepareDriver() and initializes AppiumDriver
      * driverSingleton field along with waitSingleton prior to returning waitSingleton.
-     **/
-    public static WebDriverWait driverWait() throws IOException {
+     * @return waitSingleton
+     *         Returns initialized field
+     * @throws MalformedURLException
+     *         If url needed to #prepareDriver() is incorrect
+     */
+    public static WebDriverWait driverWait() throws MalformedURLException {
         if (waitSingleton == null) prepareDriver();
         return waitSingleton;
     }

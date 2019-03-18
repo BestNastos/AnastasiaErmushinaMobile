@@ -3,10 +3,10 @@ package scenarios;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import setup.Driver;
 import setup.TestProperties;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import static setup.Driver.*;
 
@@ -19,21 +19,21 @@ public class Hooks {
     }
 
     /**
-     * Required variables will be initialized by inherited constructor
-     *
+     * Loads and reads properties to prepare driver for tests.
      * @throws IOException
+     *         If path to property file in #loadProperties() is incorrect
+     *         or url needed to #prepareDriver() is incorrect.
      */
-    //TODO need constructor with super()?
-    @BeforeSuite(description = "Prepare driver to run test(s)", groups = {"web", "native"})
+    @BeforeSuite(description = "load properties and prepare driver for tests", groups = {"web", "native"})
     public void setUp() throws IOException {
-        properties.loadProperties();
-        readProperties(properties);
+        readProperties(properties.loadProperties());
         prepareDriver();
         System.out.println("Setup complete");
     }
 
-    @AfterSuite(description = "Close driver on all tests completion", groups = {"web", "native"})
-    public void tearDown() throws IOException {
+    //TODO add docs?
+    @AfterSuite(description = "Close driver after tests", groups = {"web", "native"})
+    public void tearDown() throws MalformedURLException { //TODO this exception because we try to init driver. fix?
         driver().quit();
         System.out.println("Teardown complete");
     }

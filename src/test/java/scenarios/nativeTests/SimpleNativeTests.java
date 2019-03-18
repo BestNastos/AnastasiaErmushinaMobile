@@ -18,7 +18,7 @@ public class SimpleNativeTests extends Hooks {
         super(NATIVE.toString());
     }
 
-    @Test(description = "Just click on button 'Add contact'")
+    @Test(description = "Click 'Add Contact' button and check result")
     public void nativeTest() throws IOException {
         String packName = "com.example.android.contactmanager:id/";
 

@@ -16,7 +16,7 @@ public class SimpleWebTests extends Hooks {
         super(WEB.toString());
     }
 
-    @Test(description = "Open website")
+    @Test(description = "Open website and assert it is opened")
     public void webTest() throws Exception {
 
         // 1. Open Website

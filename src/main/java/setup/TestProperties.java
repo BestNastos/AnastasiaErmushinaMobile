@@ -4,6 +4,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Incapsulates Properties collection, loads properties from files in it and
+ * retrieves property values by keys.
+ */
+
 public class TestProperties {
 
     private Properties currentProps = new Properties();
@@ -13,16 +18,29 @@ public class TestProperties {
         this.propertyPath = path;
     }
 
-    public Properties loadProperties() throws IOException {
+    /**
+     * Loads properties from file into 'Properties currentProps' field.
+     * @return This object.
+     * @throws IOException
+     *         If path to property file is incorrect.
+     */
+    public TestProperties loadProperties() throws IOException {
         FileInputStream in = new FileInputStream(propertyPath);
         currentProps.load(in);
         in.close();
-        return currentProps;
+        return this;
     }
 
+    /**
+     * Returns property value by key. If key is missing, loads properties from file.
+     * @param key
+     *        The key of the value to return
+     * @return The value corresponding to the key
+     * @throws IOException
+     *         If path to property file in #loadProperties() is incorrect.
+     */
     String getPropertyValue(String key) throws IOException {
-        if (!currentProps.containsKey(key)) currentProps = loadProperties();
-        // "null" as second parameter (defaultValue) seems redundant:
+        if (!currentProps.containsKey(key)) loadProperties();
         return currentProps.getProperty(key);
     }
 }
