@@ -26,7 +26,6 @@ public class SimpleNativeTests extends Hooks {
      */
     @Test(description = "Click 'Add Contact' and check result")
     public void nativeTest() throws MalformedURLException {
-//        String packName = "com.example.android.contactmanager";
 
         // 1. Click "Add Contact"
         WebElement abbButton = driver().findElement(By.id(APP_PACK + ":id/addContactButton"));
@@ -52,8 +51,5 @@ public class SimpleNativeTests extends Hooks {
         assertNotNull(driver().getKeyboard());
 
         System.out.println("Native test complete");
-
-        //TODO Assertions needs to be verified (tested) in turn.
-        //TODO “Mutation testing” (light version) can be used for this purpose.
     }
 }
