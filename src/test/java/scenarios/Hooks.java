@@ -2,6 +2,7 @@ package scenarios;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import setup.TestProperties;
 
@@ -10,29 +11,34 @@ import java.net.MalformedURLException;
 
 import static setup.Driver.*;
 
-//@Test(groups = {"web", "native"}) //TODO testng config?
-public class Hooks {
-    private TestProperties properties;
+/**
+ * Loads and reads properties to prepare driver for tests. Closes driver after test.
+ */
 
-    protected Hooks(String path) {
-        properties = new TestProperties(path);
-    }
+@Test(groups = {"web", "native"})
+public class Hooks {
 
     /**
      * Loads and reads properties to prepare driver for tests.
      *
      * @throws IOException If path to property file in #loadProperties() is incorrect
-     *                     or url needed to #prepareDriver() is incorrect.
+     *                     or URL needed to #prepareDriver() is incorrect.
      */
-    @BeforeSuite(description = "load properties and prepare driver for tests", groups = {"web", "native"})
-    public void setUp() throws IOException {
-        readProperties(properties.loadProperties());
+    @Parameters("property path")
+    @BeforeSuite(description = "load properties and prepare driver for tests",
+            groups = {"web", "native"})
+    public void setUp(String path) throws IOException {
+        readProperties(new TestProperties(path).loadProperties());
         prepareDriver();
         System.out.println("Setup complete");
     }
 
-    //TODO add docs?
-    //TODO exception because we try to init driver. fix?
+    /**
+     * Closes driver.
+     *
+     * @throws MalformedURLException if incorrect URL is passed to driver constructor in
+     *                               #prepareDriver() method within in #driver() method.
+     */
     @AfterSuite(description = "Close driver after tests", groups = {"web", "native"})
     public void tearDown() throws MalformedURLException {
         driver().quit();

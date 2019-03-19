@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Web Test Suite" verbose="1">
+
+    <parameter name="property path" value="src\webtest.properties"/>
+    <test name="Web Test">
+
+        <groups>
+            <run>
+                <include name="web"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="scenarios.Hooks"/>
+            <class name="scenarios.webTests.SimpleWebTests" />
+        </classes>
+
+    </test>
+
+</suite>

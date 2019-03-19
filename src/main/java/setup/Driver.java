@@ -14,15 +14,16 @@ import static setup.KeysAndOptions.*;
 
 /**
  * This class reads properties, initializes a driver with test properties
- * and a WebDriverWait object
+ * and a WebDriverWait object along with it. Provides getters for these objects.
  */
 public class Driver {
     private static AppiumDriver driverSingleton;
     private static WebDriverWait waitSingleton;
 
     // Properties to be read
-    private static String AUT;
     public static String SUT;
+    public static String BROWSER_TITLE;
+    private static String AUT;
     private static String TEST_PLATFORM;
     private static String DRIVER;
     private static String DEVICE;
@@ -44,6 +45,7 @@ public class Driver {
         TEST_PLATFORM = properties.getPropertyValue(PLATFORM_KEY);
         DRIVER = properties.getPropertyValue(DRIVER_KEY);
         DEVICE = properties.getPropertyValue(DEVICE_KEY);
+        BROWSER_TITLE = properties.getPropertyValue(BROWSER_TITLE_KEY);
     }
 
     /**
@@ -87,7 +89,7 @@ public class Driver {
     }
 
     /**
-     * Method works as a Getter for AppiumDriver driverSingleton field. If it is not
+     * Method works as a Getter for 'AppiumDriver driverSingleton' field. If it is not
      * initialized, method initializes it prior to returning it.
      *
      * @return Initialized driver.
@@ -99,9 +101,9 @@ public class Driver {
     }
 
     /**
-     * Works as a Getter for WebDriverWait waitSingleton field. If the field is not
-     * initialized, method calls prepareDriver() and initializes AppiumDriver
-     * driverSingleton field along with waitSingleton prior to returning waitSingleton.
+     * Works as a Getter for 'WebDriverWait waitSingleton' field. If the field is not
+     * initialized, method calls #prepareDriver() and initializes 'AppiumDriver
+     * driverSingleton' field along with 'waitSingleton' prior to returning 'waitSingleton'.
      *
      * @return Returns initialized field
      * @throws MalformedURLException If url needed to #prepareDriver() is incorrect

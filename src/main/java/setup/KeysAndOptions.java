@@ -17,4 +17,5 @@ class KeysAndOptions {
     static final String DRIVER_KEY = "driver";
     static final String PLATFORM_KEY = "platform";
     static final String DEVICE_KEY = "device";
+    static final String BROWSER_TITLE_KEY = "browserTitle";
 }

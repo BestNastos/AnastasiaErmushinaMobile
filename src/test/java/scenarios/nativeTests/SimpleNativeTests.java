@@ -9,14 +9,9 @@ import java.io.IOException;
 
 import static org.testng.Assert.*;
 import static setup.Driver.driver;
-import static setup.PropertyFile.NATIVE;
 
-//@Test(groups = "native")
+@Test(groups = "native")
 public class SimpleNativeTests extends Hooks {
-
-    SimpleNativeTests() {
-        super(NATIVE.toString());
-    }
 
     @Test(description = "Click 'Add Contact' button", groups = "native")
     public void nativeTest() throws IOException {
