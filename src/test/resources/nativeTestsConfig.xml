@@ -1,8 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Native Test Suite" thread-count="1" verbose="1">
+<suite name="Native Test Suite" verbose="1">
 
-    <test name="Native">
+    <parameter name="property path" value="src\nativetests.properties"/>
+    <test name="Native Test">
 
         <groups>
             <run>

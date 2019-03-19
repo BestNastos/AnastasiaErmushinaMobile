@@ -1,10 +1,14 @@
 package setup;
 
+/**
+ * Stores paths to property files for testing native, web and hybrid applications.
+ */
+
 public enum PropertyFile {
 
     NATIVE("src\\nativetests.properties"),
     WEB("src\\webtest.properties"),
-    HYBRID("src\\webtest.properties"); //for the future
+    HYBRID("src\\webtest.properties");
 
     private String propertyPath;
 

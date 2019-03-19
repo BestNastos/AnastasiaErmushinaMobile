@@ -28,7 +28,7 @@ public class SimpleWebTests extends Hooks {
         // 3. Assert the browser title is correct
         assertEquals(driver().getTitle(), "Internet Assigned Numbers Authority");
 
-        System.out.println("Site opening done");
+        System.out.println("Web test complete");
 
         //TODO what is default timeout?
         //TODO status check

@@ -14,12 +14,11 @@ import static setup.KeysAndOptions.*;
 
 /**
  * This class reads properties, initializes a driver with test properties
- * and a web driver wait object
+ * and a WebDriverWait object
  */
 public class Driver {
     private static AppiumDriver driverSingleton;
     private static WebDriverWait waitSingleton;
-    //TODO test properties field?
 
     // Properties to be read
     private static String AUT;
@@ -32,11 +31,12 @@ public class Driver {
     }
 
     /**
-     * Reads properties from TestProperties parameter and assigns them to static fields of this class
+     * Reads properties from TestProperties parameter and assigns them to static fields
+     * of this class
      *
      * @param properties TestProperties that contain data for setting driver capabilities.
-     * @throws IOException If path to property file in #loadProperties() within #getPropertyValue(String key)
-     *                     is incorrect.
+     * @throws IOException If path to property file in #loadProperties() within
+     *                     #getPropertyValue(String key) is incorrect.
      */
     public static void readProperties(TestProperties properties) throws IOException {
         AUT = properties.getPropertyValue(AUT_KEY);
@@ -49,7 +49,8 @@ public class Driver {
     /**
      * Initialize driver with appropriate capabilities depending on platform and application
      *
-     * @throws IllegalArgumentException If given an unknown mobile platform or unknown type of app
+     * @throws IllegalArgumentException If given an unknown mobile platform or unknown type
+     *                                  of app
      * @throws MalformedURLException    If url needed to instantiate driver is incorrect
      */
     public static void prepareDriver() throws IllegalArgumentException, MalformedURLException {
@@ -73,8 +74,7 @@ public class Driver {
         // Setup type of application: mobile, web (or hybrid)
         if (AUT != null && SUT == null) {
             // Native
-            File app = new File(AUT);
-            capabilities.setCapability(APP, app.getAbsolutePath());
+            capabilities.setCapability(APP, new File(AUT).getAbsolutePath());
         } else if (SUT != null && AUT == null) {
             // Web
             capabilities.setCapability(BROWSER_NAME, browserName);
@@ -87,8 +87,8 @@ public class Driver {
     }
 
     /**
-     * Method works as a Getter for AppiumDriver driverSingleton field. If it is not initialized,
-     * method initializes it prior to returning it.
+     * Method works as a Getter for AppiumDriver driverSingleton field. If it is not
+     * initialized, method initializes it prior to returning it.
      *
      * @return Initialized driver.
      * @throws MalformedURLException If url needed to #prepareDriver() is incorrect
@@ -103,8 +103,7 @@ public class Driver {
      * initialized, method calls prepareDriver() and initializes AppiumDriver
      * driverSingleton field along with waitSingleton prior to returning waitSingleton.
      *
-     * @return waitSingleton
-     * Returns initialized field
+     * @return Returns initialized field
      * @throws MalformedURLException If url needed to #prepareDriver() is incorrect
      */
     public static WebDriverWait driverWait() throws MalformedURLException {

@@ -45,7 +45,7 @@ public class SimpleNativeTests extends Hooks {
         //6. Assert that keyboard pops up
         assertNotNull(driver().getKeyboard());
 
-        System.out.println("Test complete");
+        System.out.println("Native test complete");
 
         //TODO Assertions needs to be verified (tested) in turn.
         //TODO “Mutation testing” (light version) can be used for this purpose.
