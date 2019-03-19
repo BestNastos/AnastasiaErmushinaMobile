@@ -5,36 +5,47 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import scenarios.Hooks;
 
-import java.io.IOException;
+import java.net.MalformedURLException;
 
 import static org.testng.Assert.*;
+import static setup.Driver.APP_PACK;
 import static setup.Driver.driver;
 
+/**
+ * Native test(s). Test properties file path is passed to the test via XML configuration file.
+ */
 @Test(groups = "native")
 public class SimpleNativeTests extends Hooks {
 
-    @Test(description = "Click 'Add Contact' button", groups = "native")
-    public void nativeTest() throws IOException {
-        String packName = "com.example.android.contactmanager:id/";
+    /**
+     * Clicks on 'Add contact' button and checks that form is opened and virtual keyboard
+     * is present.
+     *
+     * @throws MalformedURLException If incorrect URL is passed to driver constructor in
+     *                               #prepareDriver() method within #driver() method.
+     */
+    @Test(description = "Click 'Add Contact' and check result")
+    public void nativeTest() throws MalformedURLException {
+//        String packName = "com.example.android.contactmanager";
 
         // 1. Click "Add Contact"
-        WebElement abbButton = driver().findElement(By.id(packName + "addContactButton"));
+        WebElement abbButton = driver().findElement(By.id(APP_PACK + ":id/addContactButton"));
         abbButton.click();
 
         // 2. Assert that "Target Account" field is visible
-        WebElement targetAccount = driver().findElement(By.id(packName + "accountSpinner"));
+        WebElement targetAccount = driver().findElement(By.id(APP_PACK + ":id/accountSpinner"));
         assertTrue(targetAccount.isDisplayed());
 
         // 3. Assert that "Contact Name" field is visible
-        WebElement name = driver().findElement(By.id(packName + "contactNameEditText"));
+        WebElement name = driver().findElement(By.id(APP_PACK + ":id/contactNameEditText"));
         assertTrue(name.isDisplayed());
 
         // 4. Assert that "Contact Phone" field is visible
-        WebElement phone = driver().findElement(By.id(packName + "contactPhoneEditText"));
+        WebElement phone = driver().findElement(By.id(APP_PACK + ":id/contactPhoneEditText"));
         assertTrue(phone.isDisplayed());
 
         // 5. Assert that "Contact E-mail" field is visible
-        WebElement email = driver().findElement(By.id(packName + "contactEmailEditText"));
+        WebElement email = driver().findElement(By.id(APP_PACK + ":id/contactEmailEditText"));
         assertTrue(email.isDisplayed());
 
         //6. Assert that keyboard pops up

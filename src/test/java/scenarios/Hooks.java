@@ -25,8 +25,7 @@ public class Hooks {
      *                     or URL needed to #prepareDriver() is incorrect.
      */
     @Parameters("property path")
-    @BeforeSuite(description = "load properties and prepare driver for tests",
-            groups = {"web", "native"})
+    @BeforeSuite(description = "load properties and prepare driver for tests")
     public void setUp(String path) throws IOException {
         readProperties(new TestProperties(path).loadProperties());
         prepareDriver();
@@ -37,9 +36,9 @@ public class Hooks {
      * Closes driver.
      *
      * @throws MalformedURLException if incorrect URL is passed to driver constructor in
-     *                               #prepareDriver() method within in #driver() method.
+     *                               #prepareDriver() method within #driver() method.
      */
-    @AfterSuite(description = "Close driver after tests", groups = {"web", "native"})
+    @AfterSuite(description = "Close driver after tests")
     public void tearDown() throws MalformedURLException {
         driver().quit();
         System.out.println("Teardown complete");

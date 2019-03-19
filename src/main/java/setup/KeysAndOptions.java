@@ -18,4 +18,5 @@ class KeysAndOptions {
     static final String PLATFORM_KEY = "platform";
     static final String DEVICE_KEY = "device";
     static final String BROWSER_TITLE_KEY = "browserTitle";
+    static final String APP_PACK_KEY = "appPackageInDevice";
 }

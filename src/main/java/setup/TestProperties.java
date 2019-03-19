@@ -10,7 +10,6 @@ import java.util.Properties;
  */
 
 public class TestProperties {
-
     private Properties currentProps = new Properties();
     private String propertyPath;
 
@@ -32,10 +31,10 @@ public class TestProperties {
     }
 
     /**
-     * Returns property value by key. If key is missing, loads properties from file.
+     * Returns property value by key. If key is missing, loads properties from file beforehand.
      *
-     * @param key The key of the value to return
-     * @return The value corresponding to the key
+     * @param key The key of the value to return.
+     * @return The value corresponding to the key.
      * @throws IOException If path to property file in #loadProperties() is incorrect.
      */
     String getPropertyValue(String key) throws IOException {
