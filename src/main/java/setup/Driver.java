@@ -13,14 +13,15 @@ import static io.appium.java_client.remote.MobileCapabilityType.*;
 import static setup.KeysAndOptions.*;
 
 /**
- * This class reads properties, initializes a driver with test properties
- * and a WebDriverWait object along with it. Provides getters for these objects.
+ * Incapsulates AppiumDriver and WebDriverWait which act as singletons due to private
+ * constructor of this class. Sets properties to use as driver capabilities, initializes
+ * a AppiumDriver and a WebDriverWait object. Provides getters for these objects.
  */
 public class Driver {
     private static AppiumDriver driverSingleton;
     private static WebDriverWait waitSingleton;
 
-    // Properties to be read
+    // Properties to be set and used for driver capabilities:
     public static String SUT;
     public static String BROWSER_TITLE;
     private static String AUT;
@@ -28,6 +29,7 @@ public class Driver {
     private static String TEST_PLATFORM;
     private static String DRIVER;
     private static String DEVICE;
+
 
     private Driver() {
     }
@@ -40,7 +42,7 @@ public class Driver {
      * @throws IOException If path to property file in #loadProperties() within
      *                     #getPropertyValue(String key) is incorrect.
      */
-    public static void readProperties(TestProperties properties) throws IOException {
+    public static void setProperties(TestProperties properties) throws IOException {
         AUT = properties.getPropertyValue(AUT_KEY);
         SUT = properties.getPropertyValue(SUT_KEY);
         TEST_PLATFORM = properties.getPropertyValue(PLATFORM_KEY);
@@ -53,15 +55,13 @@ public class Driver {
     /**
      * Initializes driver with appropriate capabilities depending on the platform and app type.
      *
-     * @throws IllegalArgumentException If given an unknown mobile platform or unknown type
-     *                                  of app.
-     * @throws MalformedURLException    If URL needed to instantiate driver is incorrect.
+     * @throws MalformedURLException If URL needed to instantiate driver is incorrect.
      */
-    public static void prepareDriver() throws IllegalArgumentException, MalformedURLException {
+    public static void prepareDriver() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         String browserName;
 
-        // Setup test platform: Android or iOS. Browser also depends on a platform.
+        // Setup test platform:
         switch (TEST_PLATFORM) {
             case ANDROID:
                 capabilities.setCapability(DEVICE_NAME, DEVICE);
@@ -75,12 +75,12 @@ public class Driver {
         }
         capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
 
-        // Setup type of application: mobile, web (or hybrid)
+        // Setup type of application:
         if (AUT != null && SUT == null) {
-            // Native
+            // Native:
             capabilities.setCapability(APP, new File(AUT).getAbsolutePath());
         } else if (SUT != null && AUT == null) {
-            // Web
+            // Web:
             capabilities.setCapability(BROWSER_NAME, browserName);
         } else {
             throw new IllegalArgumentException("Unknown type of mobile app");
@@ -95,7 +95,7 @@ public class Driver {
      * initialized, method initializes it prior to returning.
      *
      * @return Initialized driver.
-     * @throws MalformedURLException If URL needed to #prepareDriver() is incorrect
+     * @throws MalformedURLException If URL needed to #prepareDriver() is incorrect.
      */
     public static AppiumDriver driver() throws MalformedURLException {
         if (driverSingleton == null) prepareDriver();

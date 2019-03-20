@@ -27,7 +27,7 @@ public class Hooks {
     @Parameters("property path")
     @BeforeSuite(description = "load properties and prepare driver for tests")
     public void setUp(String path) throws IOException {
-        readProperties(new TestProperties(path).loadProperties());
+        setProperties(new TestProperties(path).loadProperties());
         prepareDriver();
         System.out.println("Setup complete");
     }

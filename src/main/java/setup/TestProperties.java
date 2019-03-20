@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Incapsulates Properties collection, loads properties from files in it and
+ * Incapsulates Properties collection, loads in it properties from a file and
  * retrieves property values by keys.
  */
 

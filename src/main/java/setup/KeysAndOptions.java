@@ -7,11 +7,7 @@ package setup;
  **/
 
 class KeysAndOptions {
-    static final String ANDROID = "Android";
-    static final String CHROME = "Chrome";
-    static final String iOS = "iOS";
-    static final String SAFARI = "Safari";
-
+    // standard property key words:
     static final String AUT_KEY = "aut";
     static final String SUT_KEY = "sut";
     static final String DRIVER_KEY = "driver";
@@ -19,4 +15,10 @@ class KeysAndOptions {
     static final String DEVICE_KEY = "device";
     static final String BROWSER_TITLE_KEY = "browserTitle";
     static final String APP_PACK_KEY = "appPackageInDevice";
+
+    // the most popular browsers and mobile platforms:
+    static final String ANDROID = "Android";
+    static final String CHROME = "Chrome";
+    static final String iOS = "iOS";
+    static final String SAFARI = "Safari";
 }
