@@ -2,8 +2,7 @@
 
 5. Modify existing tests to run on a real device. What should be changed?
 
-DeviceName in code needs to be changed:
-capabilities.setCapability("deviceName", "5200b9bffeb8453b");
+- DeviceName in code needs to be changed: capabilities.setCapability("deviceName", "5200b9bffeb8453b");
 
 6. Connect a real device to Appium (describe required actions) and run tests. Are there any difference with run on emulator?
 
