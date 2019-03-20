@@ -17,7 +17,7 @@ import static setup.Driver.SUT;
  * Web test(s). Test properties file path is passed to the test via XML configuration file.
  */
 @Test(groups = "web")
-public class SimpleWebTests extends Hooks { //TODO extends?
+public class SimpleWebTests {
 
     /**
      * Opens website and asserts that website is successfully opened.
