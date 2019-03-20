@@ -39,8 +39,8 @@ public class Driver {
      * of this class
      *
      * @param properties TestProperties that contain data for setting driver capabilities.
-     * @throws IOException If path to property file in #loadProperties() within
-     *                     #getPropertyValue(String key) is incorrect.
+     * @throws IOException If path to property file is incorrect.
+     * @see TestProperties#getPropertyValue(String key)
      */
     public static void setProperties(TestProperties properties) throws IOException {
         AUT = properties.getPropertyValue(AUT_KEY);
@@ -91,11 +91,10 @@ public class Driver {
     }
 
     /**
-     * A getter for 'AppiumDriver driverSingleton' field. If it is not
-     * initialized, method initializes it prior to returning.
+     * A getter for AppiumDriver field. If it is not initialized, method initializes it.
      *
      * @return Initialized driver.
-     * @throws MalformedURLException If URL needed to #prepareDriver() is incorrect.
+     * @throws MalformedURLException If URL needed to {@link #prepareDriver()} is incorrect.
      */
     public static AppiumDriver driver() throws MalformedURLException {
         if (driverSingleton == null) prepareDriver();
@@ -103,12 +102,12 @@ public class Driver {
     }
 
     /**
-     * A getter for 'WebDriverWait waitSingleton' field. If the field is not
-     * initialized, method calls #prepareDriver() and initializes driver along
-     * with 'waitSingleton' prior to returning it.
+     * A getter for WebDriverWait field. If the field is not initialized, method calls
+     * {@link #prepareDriver()} and initializes driver along with WebDriverWait object
+     * prior to returning it.
      *
      * @return Returns initialized WebDriverWait field.
-     * @throws MalformedURLException If URL needed to #prepareDriver() is incorrect.
+     * @throws MalformedURLException If URL needed to {@link #prepareDriver()} is incorrect.
      */
     public static WebDriverWait driverWait() throws MalformedURLException {
         if (waitSingleton == null) prepareDriver();

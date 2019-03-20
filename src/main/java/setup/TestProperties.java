@@ -18,7 +18,7 @@ public class TestProperties {
     }
 
     /**
-     * Loads properties from file into 'Properties currentProps' field.
+     * Loads properties from file into Properties variable.
      *
      * @return This object.
      * @throws IOException If path to property file is incorrect.
@@ -35,7 +35,7 @@ public class TestProperties {
      *
      * @param key The key of the value to return.
      * @return The value corresponding to the key.
-     * @throws IOException If path to property file in #loadProperties() is incorrect.
+     * @throws IOException If path to property file in {@link #loadProperties()} is incorrect.
      */
     String getPropertyValue(String key) throws IOException {
         if (!currentProps.containsKey(key)) loadProperties();

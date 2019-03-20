@@ -4,6 +4,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import setup.Driver;
 import setup.TestProperties;
 
 import java.io.IOException;
@@ -21,8 +22,10 @@ public class Hooks {
     /**
      * Loads and reads properties to prepare driver for tests.
      *
-     * @throws IOException If path to property file in #loadProperties() is incorrect
-     *                     or URL needed to #prepareDriver() is incorrect.
+     * @throws IOException If path to property file in is incorrect or if
+     *                     URL needed to instantiate driver is incorrect.
+     * @see TestProperties#loadProperties()
+     * @see Driver#prepareDriver()
      */
     @Parameters("property path")
     @BeforeSuite(description = "load properties and prepare driver for tests")
@@ -35,8 +38,8 @@ public class Hooks {
     /**
      * Closes driver.
      *
-     * @throws MalformedURLException if incorrect URL is passed to driver constructor in
-     *                               #prepareDriver() method within #driver() method.
+     * @throws MalformedURLException if incorrect URL is passed to driver constructor.
+     * @see Driver#driver()
      */
     @AfterSuite(description = "Close driver after tests")
     public void tearDown() throws MalformedURLException {
