@@ -1,6 +1,8 @@
 package setup;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -9,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static io.appium.java_client.remote.AndroidMobileCapabilityType.*;
 import static io.appium.java_client.remote.MobileCapabilityType.*;
 import static setup.KeysAndOptions.*;
 
@@ -29,7 +32,8 @@ public class Driver {
     private static String TEST_PLATFORM;
     private static String DRIVER;
     private static String DEVICE;
-
+    private static String DEVICE_UDID;
+    private static String ACTIVITY;
 
     private Driver() {
     }
@@ -50,6 +54,8 @@ public class Driver {
         DEVICE = properties.getPropertyValue(DEVICE_KEY);
         BROWSER_TITLE = properties.getPropertyValue(BROWSER_TITLE_KEY);
         APP_PACK = properties.getPropertyValue(APP_PACK_KEY);
+        DEVICE_UDID = properties.getPropertyValue(UDID_KEY);
+        ACTIVITY = properties.getPropertyValue(ACTIVITY_KEY);
     }
 
     /**
@@ -65,6 +71,9 @@ public class Driver {
         switch (TEST_PLATFORM) {
             case ANDROID:
                 capabilities.setCapability(DEVICE_NAME, DEVICE);
+                capabilities.setCapability(UDID, DEVICE_UDID);
+                capabilities.setCapability(APP_PACKAGE, APP_PACK);
+                capabilities.setCapability(APP_ACTIVITY, ACTIVITY);
                 browserName = CHROME;
                 break;
             case iOS:
@@ -78,7 +87,7 @@ public class Driver {
         // Setup type of application:
         if (AUT != null && SUT == null) {
             // Native:
-            capabilities.setCapability(APP, new File(AUT).getAbsolutePath());
+//            capabilities.setCapability(APP, new File(AUT).getAbsolutePath());//TODO unnecessary
         } else if (SUT != null && AUT == null) {
             // Web:
             capabilities.setCapability(BROWSER_NAME, browserName);

@@ -15,6 +15,9 @@ class KeysAndOptions {
     static final String DEVICE_KEY = "device";
     static final String BROWSER_TITLE_KEY = "browserTitle";
     static final String APP_PACK_KEY = "appPackageInDevice";
+    static final String UDID_KEY = "udid";
+    static final String ACTIVITY_KEY = "activity";
+
 
     // the most popular browsers and mobile platforms:
     static final String ANDROID = "Android";
