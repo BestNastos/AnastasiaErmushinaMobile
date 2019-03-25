@@ -43,7 +43,7 @@ public class Hooks {
      */
     @AfterSuite(description = "Close driver after tests")
     public void tearDown() throws MalformedURLException {
-        driver().closeApp();
+        driver().closeApp(); // closeApp() doesn't turn off the device unlike quit()
         System.out.println("Teardown complete");
     }
 }

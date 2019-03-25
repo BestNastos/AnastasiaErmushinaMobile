@@ -1,7 +1,6 @@
 package scenarios.webTests;
 
 import org.testng.annotations.Test;
-import scenarios.Hooks;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
