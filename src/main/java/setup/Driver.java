@@ -1,8 +1,6 @@
 package setup;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
-import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -87,7 +85,7 @@ public class Driver {
         // Setup type of application:
         if (AUT != null && SUT == null) {
             // Native:
-//            capabilities.setCapability(APP, new File(AUT).getAbsolutePath());//TODO unnecessary
+            capabilities.setCapability(APP, new File(AUT).getAbsolutePath());//TODO unnecessary
         } else if (SUT != null && AUT == null) {
             // Web:
             capabilities.setCapability(BROWSER_NAME, browserName);
