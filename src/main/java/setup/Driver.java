@@ -68,8 +68,6 @@ public class Driver {
         // Setup test platform:
         switch (TEST_PLATFORM) {
             case ANDROID:
-                capabilities.setCapability(DEVICE_NAME, DEVICE);
-                capabilities.setCapability(UDID, DEVICE_UDID);
                 capabilities.setCapability(APP_PACKAGE, APP_PACK);
                 capabilities.setCapability(APP_ACTIVITY, ACTIVITY);
                 browserName = CHROME;
@@ -81,11 +79,14 @@ public class Driver {
                 throw new IllegalArgumentException("Unknown mobile platform: " + TEST_PLATFORM);
         }
         capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
+        capabilities.setCapability(DEVICE_NAME, DEVICE);
+        capabilities.setCapability(UDID, DEVICE_UDID);
+
 
         // Setup type of application:
         if (AUT != null && SUT == null) {
             // Native:
-            capabilities.setCapability(APP, new File(AUT).getAbsolutePath());//TODO unnecessary
+//            capabilities.setCapability(APP, new File(AUT).getAbsolutePath());//TODO unnecessary
         } else if (SUT != null && AUT == null) {
             // Web:
             capabilities.setCapability(BROWSER_NAME, browserName);
