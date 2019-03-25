@@ -43,7 +43,7 @@ public class Hooks {
      */
     @AfterSuite(description = "Close driver after tests")
     public void tearDown() throws MalformedURLException {
-        driver().quit();
+        driver().closeApp();
         System.out.println("Teardown complete");
     }
 }
