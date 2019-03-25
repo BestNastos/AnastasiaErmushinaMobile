@@ -1,12 +1,14 @@
 # AnastasiaErmushinaMobile
 
-5. Modify existing tests to run on a real device. What should be changed?
+Tasks:
+1. Change settings to run web test on a certain iOS device in mobile cloud. Run test with your changes. Did test pass? 
+- Yes.
 
-- DeviceName in code needs to be changed: capabilities.setCapability("deviceName", "5200b9bffeb8453b");
+2. Change settings to run native test on a certain/random Android device in mobile cloud. Add support of appPackage and appActivity parameters for Android devices (reading from a .properties file and then setting in the DesiredCapabilities). Locally installed Appium DT has no need in these parameters, but for Appium server of EPAM mobile cloud it’s mandatory.
 
-6. Connect a real device to Appium (describe required actions) and run tests. Are there any difference with run on emulator?
+3. Run test with your changes. Did test pass? 
+- Yes.
 
-- You need to enable developer mode on physical device, enable USB debugging, set USB configuration to MTP.
-- After you connect actual device via USB you need to allow this computer to work with the device (click OK in pop up).
-- Run Appium, add new set of desired capabilities for the divice if you want to work with Inspector.
-- Unlike AVD, physical devide doesn’t slow down the PC which makes work much more comfortable. Appium Inspector doesn’t lag.
+4. Try to use autoLaunch capability with app as before instead of appPackage and appActivity. Does this approach work?
+- No, test falls with exception:
+"org.openqa.selenium.SessionNotCreatedException: Unable to create a new remote session. Please check the server log for more details. Original error: {"status":13,"value":{"message":"An unknown server-side error occurred while processing the command. Original error: The desired capabilities must include either an app, appPackage or browserName"},"sessionId":null} (WARNING: The server did not provide any stacktrace information)"
