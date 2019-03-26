@@ -1,6 +1,8 @@
 package scenarios;
 
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -9,7 +11,6 @@ import setup.Driver;
 import setup.TestProperties;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 import static setup.Driver.*;
 
@@ -18,33 +19,34 @@ import static setup.Driver.*;
  */
 
 @Test(groups = {"web", "native"})
-public class Hooks {
+public abstract class Hooks {
+
+    protected AppiumDriver driver;
+    protected WebDriverWait wait;
 
     /**
-     * Loads and reads properties to prepare driver for tests.
+     * Loads and reads properties to prepare driver and WebDriverWait object for tests.
      *
-     * @throws IOException if path to property file is incorrect in
-     *                     {@link TestProperties#loadProperties()} or if
-     *                     URL needed to instantiate driver is incorrect
-     *                     in {@link Driver#prepareDriver()}
+     * @throws IOException in case of incorrect path to property file in
+     *                     {@link TestProperties#loadProperties} or incorrect URL
+     *                     for driver initialization in {@link Driver#getDriver}
+     *                     or {@link Driver#getDriverWait}
      */
     @Parameters("property path")
     @BeforeSuite(description = "load properties and prepare driver for tests")
     public void setUp(String path) throws IOException {
         setProperties(new TestProperties(path).loadProperties());
-        prepareDriver();
+        driver = getDriver();
+        wait = getDriverWait();
         System.out.println("Setup complete");
     }
 
     /**
-     * Closes app instead of calling {@link RemoteWebDriver#quit()} to avoid switching off the device.
-     *
-     * @throws MalformedURLException if incorrect URL is passed to driver constructor
-     *                               in {@link Driver#driver()}.
+     * Closes app instead of calling {@link RemoteWebDriver#quit} to avoid switching off the device.
      */
     @AfterSuite(description = "Close driver after tests")
-    public void tearDown() throws MalformedURLException {
-        driver().closeApp();
+    public void tearDown() {
+        driver.closeApp();
         System.out.println("Teardown complete");
     }
 }

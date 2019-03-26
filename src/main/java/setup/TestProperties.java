@@ -35,7 +35,7 @@ public class TestProperties {
      *
      * @param key the key of the value to return.
      * @return the value corresponding to the key.
-     * @throws IOException if path to property file in {@link #loadProperties()} is incorrect.
+     * @throws IOException if path to property file in {@link #loadProperties} is incorrect.
      */
     String getPropertyValue(String key) throws IOException {
         if (!currentProps.containsKey(key)) loadProperties();
