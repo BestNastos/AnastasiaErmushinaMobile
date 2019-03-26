@@ -1,5 +1,6 @@
 package scenarios;
 
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -22,10 +23,10 @@ public class Hooks {
     /**
      * Loads and reads properties to prepare driver for tests.
      *
-     * @throws IOException If path to property file in is incorrect or if
-     *                     URL needed to instantiate driver is incorrect.
-     * @see TestProperties#loadProperties()
-     * @see Driver#prepareDriver()
+     * @throws IOException if path to property file is incorrect in
+     *                     {@link TestProperties#loadProperties()} or if
+     *                     URL needed to instantiate driver is incorrect
+     *                     in {@link Driver#prepareDriver()}
      */
     @Parameters("property path")
     @BeforeSuite(description = "load properties and prepare driver for tests")
@@ -36,14 +37,14 @@ public class Hooks {
     }
 
     /**
-     * Closes driver.
+     * Closes app instead of calling {@link RemoteWebDriver#quit()} to avoid switching off the device.
      *
-     * @throws MalformedURLException if incorrect URL is passed to driver constructor.
-     * @see Driver#driver()
+     * @throws MalformedURLException if incorrect URL is passed to driver constructor
+     *                               in {@link Driver#driver()}.
      */
     @AfterSuite(description = "Close driver after tests")
     public void tearDown() throws MalformedURLException {
-        driver().closeApp(); // closeApp() doesn't turn off the device unlike quit()
+        driver().closeApp();
         System.out.println("Teardown complete");
     }
 }

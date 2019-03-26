@@ -1,9 +1,9 @@
 package setup;
 
 /**
- * Provides String constants for driver preparation. Provides standard property key words
- * for retrieving values from property files. It also includes names of the most popular
- * browsers and mobile platforms for setting a browser in case of web app testing.
+ * Provides String constants for driver preparation for web or native test(s). Provides standard
+ * property key words for retrieving values from property files. It also includes names of the most
+ * popular browsers and mobile platforms for setting a browser in case of web app testing.
  **/
 
 public class KeysAndOptions {
