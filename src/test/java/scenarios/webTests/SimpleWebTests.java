@@ -1,5 +1,6 @@
 package scenarios.webTests;
 
+import ianaWebsite.HomePage;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -28,20 +29,26 @@ public class SimpleWebTests {
     @Test(description = "Open website and assert it is opened")
     public void webTest() throws IOException {
 
-        // 1. Open Website.
-        driver().get(SUT);
+        HomePage homePage = new HomePage(driver());
+        homePage.openWebsite(SUT, driverWait());
+        homePage.checkBrowserTitleIsCorrect(BROWSER_TITLE);
+        homePage.checkMainContentIsPresent();
+        homePage.checkStatusCodeIsOk();
 
-        // 2. Assert the page is loaded.
-        driverWait().until(urlMatches(SUT + "/"));
-
-        // 3. Assert the browser title is correct.
-        assertEquals(driver().getTitle(), BROWSER_TITLE);
-
-        // 4. Assert that Status Code is OK (200).
-        URL sut = new URL(driver().getCurrentUrl());
-        HttpURLConnection connection = (HttpURLConnection) sut.openConnection();
-        assertEquals(connection.getResponseCode(), HTTP_OK);
-        connection.disconnect();
+//        // 1. Open Website.
+//        driver().get(SUT);
+//
+//        // 2. Assert the page is loaded.
+//        driverWait().until(urlMatches(SUT + "/"));
+//
+//        // 3. Assert the browser title is correct.
+//        assertEquals(driver().getTitle(), BROWSER_TITLE);
+//
+//        // 4. Assert that Status Code is OK (200).
+//        URL sut = new URL(driver().getCurrentUrl());
+//        HttpURLConnection connection = (HttpURLConnection) sut.openConnection();
+//        assertEquals(connection.getResponseCode(), HTTP_OK);
+//        connection.disconnect();
 
         System.out.println("Web test complete");
     }

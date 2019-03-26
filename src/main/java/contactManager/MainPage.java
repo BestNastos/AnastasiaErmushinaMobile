@@ -1,4 +1,4 @@
-package appObjects;
+package contactManager;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;

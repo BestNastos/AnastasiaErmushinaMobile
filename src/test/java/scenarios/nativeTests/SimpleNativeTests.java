@@ -1,15 +1,11 @@
 package scenarios.nativeTests;
 
-import appObjects.MainPage;
-import appObjects.NewContactPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import contactManager.MainPage;
+import contactManager.NewContactPage;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 
-import static org.testng.Assert.*;
-import static setup.Driver.APP_PACK;
 import static setup.Driver.driver;
 
 /**

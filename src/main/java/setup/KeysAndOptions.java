@@ -6,7 +6,7 @@ package setup;
  * browsers and mobile platforms for setting a browser in case of web app testing.
  **/
 
-class KeysAndOptions {
+public class KeysAndOptions {
     // standard property key words:
     static final String AUT_KEY = "aut";
     static final String SUT_KEY = "sut";
