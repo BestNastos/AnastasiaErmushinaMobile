@@ -1,4 +1,4 @@
-# AnastasiaErmushinaMobile
+# TO RUN TESTS LAUNCH .XML FILES WITHIN "SRC" DIRECTORY.
 
 5. Modify existing tests to run on a real device. What should be changed?
 
