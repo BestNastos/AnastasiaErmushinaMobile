@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Native Test Suite" verbose="1">
+<suite name="Android Native Test Suite" verbose="1">
 
-    <parameter name="property path" value="src\test\resources\props\nativetests.properties"/>
-    <test name="Native Test">
+    <parameter name="property path" value="src\test\resources\props\androidNativeTestCloud.properties"/>
+    <test name="Android Native Test">
 
         <groups>
             <run>
