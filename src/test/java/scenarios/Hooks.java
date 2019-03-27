@@ -14,8 +14,8 @@ import java.io.IOException;
 import static setup.Driver.*;
 
 /**
- * Loads and reads properties to prepare driver for test(s). Closes driver after test(s).
- * Path to .properties file is passed to {@link #setUp} via XML config file.
+ * Loads and reads properties to prepare driver for test(s). Path to .properties file is passed
+ * to {@link #setUp} via XML config file.
  */
 
 @Test(groups = {"web", "native"})
@@ -42,12 +42,12 @@ public abstract class Hooks {
     }
 
     /**
-     * Finishes work with app.
+     * Closes app.
      */
     @AfterSuite(description = "Close driver after tests.")
     public void tearDown() {
-        // NOTE: Method closeApp() doesn't release the resources, but it also doesn't cause device
-        // to shut down. If you are done working with the device, call driver.quit() instead.
+        // NOTE: Method closeApp() doesn't release resources, but it also doesn't cause device to
+        // shut down. If one is done working with the device, they should call driver.quit() instead.
         driver.closeApp();
         System.out.println("Teardown complete.");
     }
