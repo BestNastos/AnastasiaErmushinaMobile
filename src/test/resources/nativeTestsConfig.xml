@@ -2,7 +2,7 @@
 
 <suite name="Native Test Suite" verbose="1">
 
-    <parameter name="property path" value="src\nativetests.properties"/>
+    <parameter name="property path" value="src\test\resources\nativetests.properties"/>
     <test name="Native Test">
 
         <groups>
