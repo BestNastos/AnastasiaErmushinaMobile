@@ -1,7 +1,6 @@
 package scenarios;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -43,10 +42,12 @@ public abstract class Hooks {
     }
 
     /**
-     * Closes app instead of calling {@link RemoteWebDriver#quit} to avoid switching off the device.
+     * Finishes work with app.
      */
     @AfterSuite(description = "Close driver after tests.")
     public void tearDown() {
+        // NOTE: Method closeApp() doesn't release the resources, but it also doesn't cause device
+        // to shut down. If you are done working with the device, call driver.quit() instead.
         driver.closeApp();
         System.out.println("Teardown complete.");
     }

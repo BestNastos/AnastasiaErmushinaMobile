@@ -1,4 +1,4 @@
-# AnastasiaErmushinaMobile
+# TO RUN TESTS USE .XML FILES IN "SRC\TEST\RESOURCES\RUNNERS" DIRECTORY.
 
 Tasks:
 1. Change settings to run web test on a certain iOS device in mobile cloud. Run test with your changes. Did test pass? 
