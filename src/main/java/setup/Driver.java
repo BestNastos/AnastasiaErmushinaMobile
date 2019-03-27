@@ -28,7 +28,6 @@ public class Driver {
     private static String APP_PACK;
     private static String TEST_PLATFORM;
     private static String DRIVER_URL;
-    private static String DEVICE;
     private static String DEVICE_UDID;
     private static String ACTIVITY;
 
@@ -48,7 +47,6 @@ public class Driver {
         SUT = properties.getPropertyValue(SUT_KEY);
         TEST_PLATFORM = properties.getPropertyValue(PLATFORM_KEY);
         DRIVER_URL = properties.getPropertyValue(DRIVER_KEY);
-        DEVICE = properties.getPropertyValue(DEVICE_KEY);
         BROWSER_TITLE = properties.getPropertyValue(BROWSER_TITLE_KEY);
         APP_PACK = properties.getPropertyValue(APP_PACK_KEY);
         DEVICE_UDID = properties.getPropertyValue(UDID_KEY);
@@ -89,7 +87,6 @@ public class Driver {
             throw new IllegalArgumentException("Unknown type of mobile app");
         }
 
-        capabilities.setCapability(DEVICE_NAME, DEVICE);
         capabilities.setCapability(UDID, DEVICE_UDID);
 
         driverSingleton = new AppiumDriver(new URL(DRIVER_URL), capabilities);

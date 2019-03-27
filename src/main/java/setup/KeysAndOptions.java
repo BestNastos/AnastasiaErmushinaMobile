@@ -12,7 +12,6 @@ public class KeysAndOptions {
     static final String SUT_KEY = "sut";
     static final String DRIVER_KEY = "driver";
     static final String PLATFORM_KEY = "platform";
-    static final String DEVICE_KEY = "device";
     static final String BROWSER_TITLE_KEY = "browserTitle";
     static final String APP_PACK_KEY = "appPackageInDevice";
     static final String UDID_KEY = "udid";
