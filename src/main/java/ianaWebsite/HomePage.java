@@ -17,15 +17,15 @@ import static org.testng.Assert.*;
 import static setup.Driver.SUT;
 
 /**
- * Home Page of iana.org website. Generic @FindBy annotation is used as
- * this class is meant for web app testing and not native app testing.
+ * Home Page of iana.org website. Generic @FindBy annotation is used because
+ * this class is meant for web application testing and not native app testing.
  */
 public class HomePage {
 
     private AppiumDriver driver;
 
     @FindBy(id = "main")
-    private RemoteWebElement mainContent; //TODO change type?
+    private RemoteWebElement mainContent;
 
     public HomePage(AppiumDriver driver) {
         this.driver = driver;

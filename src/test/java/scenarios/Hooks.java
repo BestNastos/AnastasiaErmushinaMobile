@@ -15,7 +15,8 @@ import java.io.IOException;
 import static setup.Driver.*;
 
 /**
- * Loads and reads properties to prepare driver for tests. Closes driver after test.
+ * Loads and reads properties to prepare driver for test(s). Closes driver after test(s).
+ * Path to .properties file is passed to {@link #setUp} via XML config file.
  */
 
 @Test(groups = {"web", "native"})
@@ -33,7 +34,7 @@ public abstract class Hooks {
      *                     or {@link Driver#getDriverWait}
      */
     @Parameters("property path")
-    @BeforeSuite(description = "load properties and prepare driver for tests")
+    @BeforeSuite(description = "Load properties and prepare driver for tests.")
     public void setUp(String path) throws IOException {
         setProperties(new TestProperties(path).loadProperties());
         driver = getDriver();
@@ -44,9 +45,9 @@ public abstract class Hooks {
     /**
      * Closes app instead of calling {@link RemoteWebDriver#quit} to avoid switching off the device.
      */
-    @AfterSuite(description = "Close driver after tests")
+    @AfterSuite(description = "Close driver after tests.")
     public void tearDown() {
         driver.closeApp();
-        System.out.println("Teardown complete");
+        System.out.println("Teardown complete.");
     }
 }

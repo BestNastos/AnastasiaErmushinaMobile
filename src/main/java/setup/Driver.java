@@ -15,13 +15,13 @@ import static setup.KeysAndOptions.*;
 /**
  * Incapsulates AppiumDriver and WebDriverWait which act as singletons due to private
  * constructor of this class. Sets properties to use as driver capabilities, initializes
- * a AppiumDriver and a WebDriverWait object. Provides getters for these objects.
+ * an AppiumDriver and a WebDriverWait object. Provides getters for these objects.
  */
 public class Driver {
     private static AppiumDriver driverSingleton;
     private static WebDriverWait waitSingleton;
 
-    // Properties to be set and used for driver capabilities:
+    // Properties for driver capabilities:
     public static String SUT;
     public static String BROWSER_TITLE;
     private static String AUT;
@@ -37,9 +37,9 @@ public class Driver {
 
     /**
      * Reads properties from TestProperties parameter and assigns them to static fields
-     * of this class
+     * of this class.
      *
-     * @param properties testProperties that contain data for setting driver capabilities.
+     * @param properties TestProperties that contain data for setting driver capabilities.
      * @throws IOException if path to property file is incorrect.
      * @see TestProperties#getPropertyValue(String key)
      */
@@ -75,6 +75,7 @@ public class Driver {
             default:
                 throw new IllegalArgumentException("Unknown mobile platform: " + TEST_PLATFORM);
         }
+        capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
 
         // Setup type of application:
         if (AUT != null && SUT == null) {
@@ -88,7 +89,6 @@ public class Driver {
             throw new IllegalArgumentException("Unknown type of mobile app");
         }
 
-        capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
         capabilities.setCapability(DEVICE_NAME, DEVICE);
         capabilities.setCapability(UDID, DEVICE_UDID);
 
@@ -99,8 +99,8 @@ public class Driver {
     /**
      * A getter for AppiumDriver field. If it is not initialized, method initializes it.
      *
-     * @return Initialized driver.
-     * @throws MalformedURLException If URL needed to {@link #prepareDriver()} is incorrect.
+     * @return initialized driver.
+     * @throws MalformedURLException If URL needed to {@link #prepareDriver} is incorrect.
      */
     public static AppiumDriver getDriver() throws MalformedURLException {
         if (driverSingleton == null) prepareDriver();
@@ -109,11 +109,10 @@ public class Driver {
 
     /**
      * A getter for WebDriverWait field. If the field is not initialized, method calls
-     * {@link #prepareDriver()} and initializes driver along with WebDriverWait object
-     * prior to returning it.
+     * {@link #prepareDriver} and initializes driver along with WebDriverWait object.
      *
-     * @return Returns initialized WebDriverWait field.
-     * @throws MalformedURLException If URL needed to {@link #prepareDriver} is incorrect.
+     * @return initialized WebDriverWait field.
+     * @throws MalformedURLException if URL needed to {@link #prepareDriver} is incorrect.
      */
     public static WebDriverWait getDriverWait() throws MalformedURLException {
         if (waitSingleton == null) prepareDriver();

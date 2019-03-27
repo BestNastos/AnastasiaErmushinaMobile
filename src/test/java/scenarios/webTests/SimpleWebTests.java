@@ -10,18 +10,18 @@ import static setup.Driver.*;
 import static setup.Driver.SUT;
 
 /**
- * Web test(s). Test properties file path is passed to the test via XML configuration file.
+ * Web test(s). Test properties file path is passed to Hooks via XML configuration file.
  */
 @Test(groups = "web")
 public class SimpleWebTests extends Hooks {
 
     /**
-     * Opens website and asserts that website is successfully opened.
+     * Opens website and asserts that it is successfully opened.
      *
      * @throws IOException if an I/O exception occurs while establishing HttpURLConnection in
      *                     {@link ianaWebsite.HomePage#checkStatusCodeIsOk}.
      */
-    @Test(description = "Open website and assert it is opened")
+    @Test(description = "Open website and assert it is opened.")
     public void webTest() throws IOException {
 
         // 1. Open site under testing.

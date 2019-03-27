@@ -9,7 +9,7 @@ import static org.openqa.selenium.support.PageFactory.*;
 
 /**
  * Main Page of the Contact Manager app. The page is developed for
- * Android test(s) as there is no Contact Manager version for iOS.
+ * Android test(s) since there is no Contact Manager version for iOS.
  */
 public class MainPage {
 
