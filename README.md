@@ -7,7 +7,7 @@ Tasks:
 2. Change settings to run native test on a certain/random Android device in mobile cloud. Add support of appPackage and appActivity parameters for Android devices (reading from a .properties file and then setting in the DesiredCapabilities). Locally installed Appium DT has no need in these parameters, but for Appium server of EPAM mobile cloud it’s mandatory.
 
 3. Run test with your changes. Did test pass?
-- Yes. But app has to be manually pre-installed.
+- Yes.
 
 4. Try to use autoLaunch capability with app as before instead of appPackage and appActivity. Does this approach work?
 - No, test falls with exception:
