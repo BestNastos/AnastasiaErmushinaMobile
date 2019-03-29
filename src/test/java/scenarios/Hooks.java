@@ -42,13 +42,13 @@ public abstract class Hooks {
     }
 
     /**
-     * Closes app.
+     * Finishes work.
      */
     @AfterSuite(description = "Close driver after tests.")
     public void tearDown() {
-        // NOTE: Method closeApp() doesn't release resources, but it also doesn't cause device to
-        // shut down. If one is done working with the device, they should call driver.quit() instead.
-        driver.closeApp();
+        // NOTE: Method quit() reboots the device (probably to release it from use so
+        // it becomes available for others). To avoid reboot use method closeApp() instead.
+        driver.quit();
         System.out.println("Teardown complete.");
     }
 }
