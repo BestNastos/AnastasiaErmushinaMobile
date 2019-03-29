@@ -90,7 +90,7 @@ public class Driver {
         capabilities.setCapability(UDID, DEVICE_UDID);
 
         driverSingleton = new AppiumDriver(new URL(DRIVER_URL), capabilities);
-        waitSingleton = new WebDriverWait(driverSingleton, 10);
+        waitSingleton = new WebDriverWait(driverSingleton, 15);
     }
 
     /**
