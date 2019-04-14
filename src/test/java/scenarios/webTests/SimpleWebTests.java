@@ -28,14 +28,14 @@ public class SimpleWebTests extends Hooks {
         HomePage homePage = new HomePage(driver);
         homePage.openWebsite(SUT, wait);
 
-        // 2. Assert browser title is correct.
+        // 2. Assert status code is OK.
+        homePage.checkStatusCodeIsOk();
+
+        // 3. Assert browser title is correct.
         homePage.checkBrowserTitleIsCorrect(BROWSER_TITLE);
 
-        // 3. Assert main content is present.
+        // 4. Assert main content is present.
         homePage.checkMainContentIsPresent();
-
-        // 4. Assert status code is OK.
-        homePage.checkStatusCodeIsOk();
 
         System.out.println("Web test complete");
     }

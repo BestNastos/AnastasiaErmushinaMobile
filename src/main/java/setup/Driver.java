@@ -1,6 +1,9 @@
 package setup;
 
 import io.appium.java_client.AppiumDriver;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -61,6 +64,7 @@ public class Driver {
     private static void prepareDriver() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         String browserName;
+//        installApp();
 
         // Setup test platform:
         switch (TEST_PLATFORM) {
@@ -115,5 +119,23 @@ public class Driver {
         if (waitSingleton == null) prepareDriver();
         return waitSingleton;
     }
+
+//    public static Response stopUsingDevice() {
+//        return RestAssured
+//                .given()
+//                .header("Authorization", "Bearer " + "b01d96e5-debe-4d64-ae8e-ae3fa5a47ce7",
+//                        "Content-Type", ContentType.JSON)
+//                .delete("http://mobilecloud.epam.com/automation/api/device/" + DEVICE_UDID)
+//                .prettyPeek();
+//    }
+//
+//    public static Response installApp() {
+//        return RestAssured
+//                .given()
+//                .header("Authorization", "Bearer " + "b01d96e5-debe-4d64-ae8e-ae3fa5a47ce7")
+//                .body("file=@ContactManager.apk")
+//                .post("http://mobilecloud.epam.com/automation/api/storage/install/" + DEVICE_UDID)
+//                .prettyPeek();
+//    }
 }
 
