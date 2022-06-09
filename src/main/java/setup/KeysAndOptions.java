@@ -10,7 +10,7 @@ public class KeysAndOptions {
     // standard property key words:
     static final String AUT_KEY = "aut";
     static final String SUT_KEY = "sut";
-    static final String DRIVER_KEY = "driver";
+    static final String SERVER_KEY = "server";
     static final String PLATFORM_KEY = "platform";
     static final String BROWSER_TITLE_KEY = "browserTitle";
     static final String APP_PACK_KEY = "appPackageInDevice";

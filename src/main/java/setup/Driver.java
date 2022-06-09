@@ -32,7 +32,7 @@ public class Driver {
     private static String AUT;
     private static String APP_PACK;
     private static String TEST_PLATFORM;
-    private static String DRIVER_URL;
+    private static String SERVER_URL;
     private static String ACTIVITY;
     private static String DEVICE_NAME;
 
@@ -59,7 +59,7 @@ public class Driver {
         AUT = properties.getPropertyValue(AUT_KEY);
         SUT = properties.getPropertyValue(SUT_KEY);
         TEST_PLATFORM = properties.getPropertyValue(PLATFORM_KEY);
-        DRIVER_URL = properties.getPropertyValue(DRIVER_KEY);
+        SERVER_URL = properties.getPropertyValue(SERVER_KEY);
         BROWSER_TITLE = properties.getPropertyValue(BROWSER_TITLE_KEY);
         APP_PACK = properties.getPropertyValue(APP_PACK_KEY);
         ACTIVITY = properties.getPropertyValue(ACTIVITY_KEY);
@@ -122,7 +122,7 @@ public class Driver {
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
         capabilities.setCapability(MobileCapabilityType.APP, AUT);
 
-        driverSingleton = new AppiumDriver(new URL(DRIVER_URL), capabilities);
+        driverSingleton = new AppiumDriver(new URL(SERVER_URL), capabilities);
         // Place breakpoint on next line - some actions will need to be done on devices' UI manually
         waitSingleton = new WebDriverWait(driverSingleton, Duration.ofSeconds(15));
     }
