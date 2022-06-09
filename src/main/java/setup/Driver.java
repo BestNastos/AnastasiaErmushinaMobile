@@ -1,18 +1,20 @@
 package setup;
 
 import io.appium.java_client.AppiumDriver;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
+import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 import static io.appium.java_client.remote.AndroidMobileCapabilityType.*;
-import static io.appium.java_client.remote.MobileCapabilityType.*;
 import static setup.KeysAndOptions.*;
 
 /**
@@ -31,8 +33,16 @@ public class Driver {
     private static String APP_PACK;
     private static String TEST_PLATFORM;
     private static String DRIVER_URL;
-    private static String DEVICE_UDID;
     private static String ACTIVITY;
+    private static String DEVICE_NAME;
+
+    //paths
+    private final static File nodeJSPathFile = new File("C:\\Program Files\\nodejs\\node.exe");
+    private final static File appiumPathFile = new File("C:\\Program Files\\Appium\\resources\\app\\" +
+            "node_modules\\appium\\build\\lib\\main.js");
+    private final static String ipLocalhost = "127.0.0.1";
+    private final static int port = 4723;
+    private final static File logFile = new File("AppiumLog.txt");
 
     private Driver() {
     }
@@ -52,8 +62,23 @@ public class Driver {
         DRIVER_URL = properties.getPropertyValue(DRIVER_KEY);
         BROWSER_TITLE = properties.getPropertyValue(BROWSER_TITLE_KEY);
         APP_PACK = properties.getPropertyValue(APP_PACK_KEY);
-        DEVICE_UDID = properties.getPropertyValue(UDID_KEY);
         ACTIVITY = properties.getPropertyValue(ACTIVITY_KEY);
+        DEVICE_NAME = properties.getPropertyValue(DEVICE_NAME_KEY);
+    }
+
+    public static void startServer(){
+        AppiumServiceBuilder appiumBuilder = new AppiumServiceBuilder();
+        appiumBuilder
+                .usingDriverExecutable(nodeJSPathFile)
+                .withAppiumJS(appiumPathFile)
+                .withIPAddress(ipLocalhost)
+                .usingPort(port)
+                //if this base path doesn't work, try not setting it or use "/":
+                .withArgument(GeneralServerFlag.BASEPATH, "/wd/hub")
+                .withLogFile(logFile);
+
+        AppiumDriverLocalService service = AppiumDriverLocalService.buildService(appiumBuilder);
+        service.start();
     }
 
     /**
@@ -62,11 +87,15 @@ public class Driver {
      * @throws MalformedURLException If URL needed to instantiate driver is incorrect.
      */
     private static void prepareDriver() throws MalformedURLException {
+
+        startServer();
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         String browserName;
 //        installApp();
 
-        // Setup test platform:
+        capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
+
         switch (TEST_PLATFORM) {
             case ANDROID:
                 browserName = CHROME;
@@ -77,7 +106,6 @@ public class Driver {
             default:
                 throw new IllegalArgumentException("Unknown mobile platform: " + TEST_PLATFORM);
         }
-        capabilities.setCapability(PLATFORM_NAME, TEST_PLATFORM);
 
         // Setup type of application:
         if (AUT != null && SUT == null) {
@@ -91,10 +119,12 @@ public class Driver {
             throw new IllegalArgumentException("Unknown type of mobile app");
         }
 
-        capabilities.setCapability(UDID, DEVICE_UDID);
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
+        capabilities.setCapability(MobileCapabilityType.APP, AUT);
 
         driverSingleton = new AppiumDriver(new URL(DRIVER_URL), capabilities);
-        waitSingleton = new WebDriverWait(driverSingleton, 15);
+        // Place breakpoint on next line - some actions will need to be done on devices' UI manually
+        waitSingleton = new WebDriverWait(driverSingleton, Duration.ofSeconds(15));
     }
 
     /**
