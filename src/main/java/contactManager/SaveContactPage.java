@@ -1,9 +1,9 @@
 package contactManager;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.WebElement;
 
 import static org.openqa.selenium.support.PageFactory.*;
 import static org.testng.Assert.*;
@@ -17,16 +17,16 @@ public class SaveContactPage {
     private AppiumDriver driver;
 
     @AndroidFindBy(id = "accountSpinner")
-    private AndroidElement targetAccountField;
+    private WebElement targetAccountField;
 
     @AndroidFindBy(id = "contactNameEditText")
-    private AndroidElement nameField;
+    private WebElement nameField;
 
     @AndroidFindBy(id = "contactPhoneEditText")
-    private AndroidElement phoneField;
+    private WebElement phoneField;
 
     @AndroidFindBy(id = "contactEmailEditText")
-    private AndroidElement emailField;
+    private WebElement emailField;
 
     public SaveContactPage(AppiumDriver driver) {
         this.driver = driver;
