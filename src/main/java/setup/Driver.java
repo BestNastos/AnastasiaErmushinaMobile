@@ -112,6 +112,7 @@ public class Driver {
             // Native:
             capabilities.setCapability(APP_PACKAGE, APP_PACK);
             capabilities.setCapability(APP_ACTIVITY, ACTIVITY);
+            capabilities.setCapability(MobileCapabilityType.APP, AUT);
         } else if (SUT != null && AUT == null) {
             // Web:
             capabilities.setCapability(BROWSER_NAME, browserName);
@@ -120,7 +121,6 @@ public class Driver {
         }
 
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
-        capabilities.setCapability(MobileCapabilityType.APP, AUT);
 
         driverSingleton = new AppiumDriver(new URL(SERVER_URL), capabilities);
         // Place breakpoint on next line - some actions will need to be done on devices' UI manually
